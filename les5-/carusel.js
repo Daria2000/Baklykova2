@@ -1,30 +1,38 @@
-let slides = document.getElementByClassName('custom-carusel-item');
-
 let index = 0;
 
 function prev() {
-showSlide(--index);
+  showSlide(--index);
 }
 
-function next(){
-showSlide(++index);
+function next() {
+  showSlide(++index);
 }
 
-const next_btn = document.getElementByClassName('custom-carousel-control-next') [0];
-const prev_btn = document.getElementByClassName('custom-carousel-control-prev')[0];
+function currentSlide(i) {
+  showSlide(index = i);
+}
 
+const next_btn = document.getElementsByClassName('custom-carousel-control-next')[0];
+const prev_btn = document.getElementsByClassName('custom-carousel-control-prev')[0];
 
-
-next_btn.addEventListener('click'.next);
-prev_btn.addEventListener('click'.next);
+next_btn.addEventListener('click', next);
+prev_btn.addEventListener('click', prev);
 
 function showSlide(i) {
-	let slides = document.getElementByClassName('custom-carousel-item');
+  let slides = document.getElementsByClassName('custom-carousel-item');
+  let length = slides.length - 1;
 
-let slide = slides[i];
+  if (i < 1) {
+    index = length;
+  }
 
-slides[i-1].classList.remove('active');
-slide.classList.add('active');
+  if (i > length) {
+    index = 0;
+  }
 
-console.log(i, slide.classList);
+  for (let element of slides) {
+    element.classList.remove('active');
+  }
+
+  slides[index].classList.add('active');
 }
